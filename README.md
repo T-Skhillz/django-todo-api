@@ -22,8 +22,8 @@ A Django REST Framework-based API for managing personal todo tasks with JWT auth
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd newproject
+git clone https://github.com/T-Skhillz/django-todo-api.git
+cd django-todo-api
 ```
 
 2. Create a virtual environment and activate it:
@@ -86,6 +86,8 @@ python manage.py runserver
 - `DELETE /tasks/<id>/` - Delete a specific task
 
 ## Usage Examples
+
+**Note:** The examples below use curl, but you can use any REST client like Thunder Client, Postman, or Insomnia. Just use the same HTTP methods, URLs, headers, and request bodies shown.
 
 ### 1. Obtain Access Token
 
@@ -168,8 +170,17 @@ Access the Django admin panel at `http://localhost:8000/admin/` to manage tasks 
 
 ## License
 
-[Your License Here]
+This project is open source and available under the [MIT License](LICENSE).
 
 ## Contributing
 
-[Your Contributing Guidelines Here]
+Contributions are welcome! If you'd like to contribute:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'Add some feature'`)
+5. Push to the branch (`git push origin feature/your-feature`)
+6. Open a Pull Request
+
+Please ensure your code follows the existing style and includes appropriate tests.
