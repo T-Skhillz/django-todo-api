@@ -74,6 +74,7 @@ python manage.py runserver
 - `POST /api/auth/login/` - Obtain JWT token pair (access & refresh)
 - `POST /api/auth/refresh/` - Refresh access token
 - `POST /api/auth/verify/` - Verify token validity
+- `POST /register/` - Register a new user account
 
 ### Tasks
 
@@ -89,7 +90,28 @@ python manage.py runserver
 
 **Note:** The examples below use curl, but you can use any REST client like Thunder Client, Postman, or Insomnia. Just use the same HTTP methods, URLs, headers, and request bodies shown.
 
-### 1. Obtain Access Token
+### 1. Register a New User
+
+```bash
+curl -X POST http://localhost:8000/register/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "newuser",
+    "email": "newuser@example.com",
+    "password": "securepassword123",
+    "password2": "securepassword123"
+  }'
+```
+
+Response:
+```json
+{
+  "username": "newuser",
+  "email": "newuser@example.com"
+}
+```
+
+### 2. Obtain Access Token
 
 ```bash
 curl -X POST http://localhost:8000/api/auth/login/ \
@@ -105,7 +127,7 @@ Response:
 }
 ```
 
-### 2. Create a Task
+### 3. Create a Task
 
 ```bash
 curl -X POST http://localhost:8000/tasks/ \
@@ -118,14 +140,14 @@ curl -X POST http://localhost:8000/tasks/ \
   }'
 ```
 
-### 3. Get All Tasks
+### 4. Get All Tasks
 
 ```bash
 curl -X GET http://localhost:8000/tasks/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
-### 4. Update a Task
+### 5. Update a Task
 
 ```bash
 curl -X PUT http://localhost:8000/tasks/1/ \
@@ -138,7 +160,7 @@ curl -X PUT http://localhost:8000/tasks/1/ \
   }'
 ```
 
-### 5. Delete a Task
+### 6. Delete a Task
 
 ```bash
 curl -X DELETE http://localhost:8000/tasks/1/ \
