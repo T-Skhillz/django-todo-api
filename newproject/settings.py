@@ -3,14 +3,6 @@ from decouple import config
 import dj_database_url
 import os
 
-import django
-from django.contrib.auth.models import User
-
-django.setup()
-
-if not User.objects.filter(username="admin").exists():
-    User.objects.create_superuser("admin", "admin@email.com", "123$&pot")
-
 
 # ----------------------
 # Base
