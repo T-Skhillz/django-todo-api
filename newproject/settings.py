@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import dj_database_url
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,25 +78,33 @@ WSGI_APPLICATION = 'newproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': config("DB_ENGINE"),
+#         'NAME': config("DB_NAME"),
+#         'USER': config("DB_USER"),
+#         'PASSWORD': config("DB_PASSWORD"),
+#         'HOST': config("DB_HOST"),
+#         'PORT': config("DB_PORT", cast=int),
+
+#         'CONN_MAX_AGE': 60,
+#         'ATOMIC_REQUESTS': True,
+
+#         'OPTIONS': {
+#             #extra settings go here
+#             #"sslmode": "require", uncomment if using remote/cloud DB
+#         }
+#     }
+# }
 
 DATABASES = {
-    'default': {
-        'ENGINE': config("DB_ENGINE"),
-        'NAME': config("DB_NAME"),
-        'USER': config("DB_USER"),
-        'PASSWORD': config("DB_PASSWORD"),
-        'HOST': config("DB_HOST"),
-        'PORT': config("DB_PORT", cast=int),
-
-        'CONN_MAX_AGE': 60,
-        'ATOMIC_REQUESTS': True,
-
-        'OPTIONS': {
-            #extra settings go here
-            #"sslmode": "require", uncomment if using remote/cloud DB
-        }
-    }
+    "default": dj_database_url.config(
+        default=None,
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
+
 
 
 # Password validation
@@ -141,6 +153,18 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+
 
 # SIMPLE_JWT = {
 #     "TOKEN_OBTAIN_SERIALIZER": "todo_list.serializers.MyTokenObtainSerializer",
