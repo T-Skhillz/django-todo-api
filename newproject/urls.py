@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, TokenVerifyView)
 from todo_list import views
+from django.http import JsonResponse
 
 def home(request):
     return JsonResponse({
