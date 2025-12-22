@@ -2,6 +2,8 @@
 
 A Django REST Framework-based API for managing personal todo tasks with JWT authentication.
 
+**🚀 Live API:** [https://django-todo-api-1.onrender.com/](https://django-todo-api-1.onrender.com/)
+
 ## Features
 
 - User authentication with JWT tokens (access, refresh, and verify)
@@ -34,7 +36,12 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 3. Install dependencies:
 ```bash
-pip install django djangorestframework djangorestframework-simplejwt python-decouple psycopg2-binary
+pip install django==5.2.8 djangorestframework==3.16.1 djangorestframework-simplejwt==5.5.1 python-decouple==3.8 psycopg2-binary==2.9.10 gunicorn==23.0.0 whitenoise==6.11.0 dj-database-url==3.0.1
+```
+
+Or install from requirements.txt:
+```bash
+pip install -r requirements.txt
 ```
 
 4. Create a `.env` file in the project root with the following variables:
@@ -90,10 +97,12 @@ python manage.py runserver
 
 **Note:** The examples below use curl, but you can use any REST client like Thunder Client, Postman, or Insomnia. Just use the same HTTP methods, URLs, headers, and request bodies shown.
 
+**API Base URL:** `https://django-todo-api-1.onrender.com`
+
 ### 1. Register a New User
 
 ```bash
-curl -X POST http://localhost:8000/register/ \
+curl -X POST https://django-todo-api-1.onrender.com/register/ \
   -H "Content-Type: application/json" \
   -d '{
     "username": "newuser",
@@ -114,7 +123,7 @@ Response:
 ### 2. Obtain Access Token
 
 ```bash
-curl -X POST http://localhost:8000/api/auth/login/ \
+curl -X POST https://django-todo-api-1.onrender.com/api/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"username": "your_username", "password": "your_password"}'
 ```
@@ -130,7 +139,7 @@ Response:
 ### 3. Create a Task
 
 ```bash
-curl -X POST http://localhost:8000/tasks/ \
+curl -X POST https://django-todo-api-1.onrender.com/tasks/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -143,14 +152,14 @@ curl -X POST http://localhost:8000/tasks/ \
 ### 4. Get All Tasks
 
 ```bash
-curl -X GET http://localhost:8000/tasks/ \
+curl -X GET https://django-todo-api-1.onrender.com/tasks/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 ### 5. Update a Task
 
 ```bash
-curl -X PUT http://localhost:8000/tasks/1/ \
+curl -X PUT https://django-todo-api-1.onrender.com/tasks/1/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -163,7 +172,7 @@ curl -X PUT http://localhost:8000/tasks/1/ \
 ### 6. Delete a Task
 
 ```bash
-curl -X DELETE http://localhost:8000/tasks/1/ \
+curl -X DELETE https://django-todo-api-1.onrender.com/tasks/1/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -180,7 +189,21 @@ curl -X DELETE http://localhost:8000/tasks/1/ \
 
 ## Admin Panel
 
-Access the Django admin panel at `http://localhost:8000/admin/` to manage tasks and users with a visual interface.
+Access the Django admin panel at `https://django-todo-api-1.onrender.com/admin/` to manage tasks and users with a visual interface.
+
+## Deployment
+
+This API is deployed on [Render](https://render.com/) with:
+- Automatic deployments from GitHub
+- PostgreSQL database
+- HTTPS/SSL enabled
+- Environment variable management
+
+**Note:** The free tier on Render may sleep after 15 minutes of inactivity. The first request after sleep takes ~30 seconds to wake up.
+
+## Local Development
+
+For local development, use `http://localhost:8000` instead of the production URL.
 
 ## Security Notes
 
