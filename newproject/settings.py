@@ -26,12 +26,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "todo_list",
     "rest_framework",
+    "corsheaders",
 ]
 
 # ----------------------
 # Middleware
 # ----------------------
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -135,6 +137,15 @@ if not DEBUG:
 # Default primary key
 # ----------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# ----------------------
+# CORS allowed origins
+# ----------------------
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+]
 
 
 
