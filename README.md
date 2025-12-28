@@ -93,6 +93,10 @@ python manage.py runserver
 - `PUT /tasks/<id>/` - Update a specific task
 - `DELETE /tasks/<id>/` - Delete a specific task
 
+### Categories
+
+- `GET /categories/` - List of categories (use the `value` field when creating/updating tasks.)
+
 ## Usage Examples
 
 **Note:** The examples below use curl, but you can use any REST client like Thunder Client, Postman, or Insomnia. Just use the same HTTP methods, URLs, headers, and request bodies shown.
