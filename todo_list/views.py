@@ -10,6 +10,7 @@ from .models import Task
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
+from .models import CATEGORY_CHOICES
 
 
 #function for root url of users and tasks
@@ -74,3 +75,11 @@ class TaskDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     permission_classes = (IsAuthenticated,)
+
+#view to fetch categories
+@api_view(["GET"])
+def get_categories(request):
+    categories = [
+        {"value": key, "label": value} for key, value in CATEGORY_CHOICES.items()
+    ]
+    return Response(categories)

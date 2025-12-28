@@ -16,7 +16,7 @@ class Task(models.Model):
     completed = models.BooleanField(default=False)
     category = models.CharField(
         choices=CATEGORY_CHOICES,
-        default="Work",
+        default="work",
         max_length=100
     )
 
