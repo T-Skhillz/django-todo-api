@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["django-todo-api-1.onrender.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["django-todo-api-1.onrender.com"]
 
 # ----------------------
 # Installed apps
