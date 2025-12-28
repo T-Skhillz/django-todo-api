@@ -87,15 +87,12 @@ python manage.py runserver
 
 - `GET /` - API root (lists available endpoints)
 - `GET /users/` - List all users (authenticated)
+- `GET /categories/` - Get available task categories
 - `GET /tasks/` - List all tasks for authenticated user
 - `POST /tasks/` - Create a new task
 - `GET /tasks/<id>/` - Retrieve a specific task
 - `PUT /tasks/<id>/` - Update a specific task
 - `DELETE /tasks/<id>/` - Delete a specific task
-
-### Categories
-
-- `GET /categories/` - List of categories (use the `value` field when creating/updating tasks.)
 
 ## Usage Examples
 
@@ -140,7 +137,26 @@ Response:
 }
 ```
 
-### 3. Create a Task
+### 3. Get Available Categories
+
+```bash
+curl -X GET https://django-todo-api-1.onrender.com/categories/
+```
+
+Response:
+```json
+[
+  {"value": "work", "label": "Work"},
+  {"value": "school", "label": "School"},
+  {"value": "business", "label": "Business"},
+  {"value": "personal", "label": "Personal"},
+  {"value": "recreational", "label": "Recreational"}
+]
+```
+
+### 4. Create a Task
+
+Use the `value` from the categories endpoint:
 
 ```bash
 curl -X POST https://django-todo-api-1.onrender.com/tasks/ \
@@ -153,14 +169,14 @@ curl -X POST https://django-todo-api-1.onrender.com/tasks/ \
   }'
 ```
 
-### 4. Get All Tasks
+### 5. Get All Tasks
 
 ```bash
 curl -X GET https://django-todo-api-1.onrender.com/tasks/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
-### 5. Update a Task
+### 6. Update a Task
 
 ```bash
 curl -X PUT https://django-todo-api-1.onrender.com/tasks/1/ \
@@ -173,7 +189,7 @@ curl -X PUT https://django-todo-api-1.onrender.com/tasks/1/ \
   }'
 ```
 
-### 6. Delete a Task
+### 7. Delete a Task
 
 ```bash
 curl -X DELETE https://django-todo-api-1.onrender.com/tasks/1/ \
