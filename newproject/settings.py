@@ -143,7 +143,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS allowed origins
 # ----------------------
 CORS_ALLOWED_ORIGINS = [
-    "https://zentask-wt0x.onrender.com",
+    "https://zentask-app.onrender.com",
     "http://127.0.0.1:5500",
 ]
 
